@@ -33,7 +33,7 @@ public class TransferService {
         to_account.setBalance(plus);
 
         // transfer create & save
-        Transfer transfer = Transfer.createTransfer(fromId, toId, balance);
+        Transfer transfer = Transfer.createTransfer(from_account, to_account, balance);
         transferRepository.save(transfer);
     }
 

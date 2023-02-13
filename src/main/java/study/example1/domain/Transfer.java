@@ -15,26 +15,24 @@ public class Transfer {
     @Column(name = "transfer_id")
     private Long id;
 
-    @JsonIgnore
-    @JoinColumn(name = "account_id")
-    private Long fromId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "from_account_id")
+    private Account fromAccount;
 
-    @JsonIgnore
-    @JoinColumn(name = "account_id")
-    private Long toId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "to_account_id")
+    private Account toAccount;
 
     private int balance;
 
     private LocalDateTime created_at;
 
-    public static Transfer createTransfer(Long fromId, Long toId, int balance) {
+    public static Transfer createTransfer(Account fromAccount, Account toAccount, int balance) {
         Transfer transfer = new Transfer();
-
-        transfer.setFromId(fromId);
-        transfer.setToId(toId);
+        transfer.setFromAccount(fromAccount);
+        transfer.setToAccount(toAccount);
         transfer.setBalance(balance);
         transfer.setCreated_at(LocalDateTime.now());
-
         return transfer;
     }
 }

@@ -18,8 +18,8 @@
         <tbody>
         <tr th:each="item : ${transfers}">
             <td th:text="${item.id}"></td>
-            <td th:text="${item.fromId}"></td>
-            <td th:text="${item.toId}"></td>
+            <td th:text="${item.fromAccount.getId()}"></td>
+            <td th:text="${item.toAccount.getId()}"></td>
             <td th:text="${item.balance}"></td>
             <td th:text="${item.created_at}"></td>
         </tr>
