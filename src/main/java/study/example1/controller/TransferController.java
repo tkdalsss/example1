@@ -12,7 +12,6 @@ import study.example1.domain.Transfer;
 import study.example1.service.EntryService;
 import study.example1.service.TransferService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -32,14 +31,14 @@ public class TransferController {
     @PostMapping("/new")
     public String execTransfer(@Valid TransferForm form, BindingResult result) {
         if (result.hasErrors()) {
-            return "redirect:/transfer/new";
+            return "transfer";
         }
 
         entryService.entry(form.getFromId(), -form.getBalance());
         entryService.entry(form.getToId(), form.getBalance());
         transferService.transfer(form.getFromId(), form.getToId(), form.getBalance());
 
-        return "redirect:/";
+        return "redirect:/transfer/list";
     }
 
     @GetMapping("/list")
