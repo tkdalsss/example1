@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" />
+<style>
+    .fieldError {
+        border-color: #bd2130;
+    }
+</style>
+<body>
+
+<div class="container">
+    <div th:replace="~{fragments/bodyHeader :: bodyHeader}" />
+
+    <form role="form" action="/account/new" th:object="${accountForm}" method="post">
+        <div class="form-group">
+            <label th:for="owner">이름</label>
+            <input type="text" th:field="*{owner}" class="form-control" placeholder="이름을 입력하세요"
+                   th:class="${#fields.hasErrors('owner')} ? 'form-control fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('owner')}" th:errors="*{owner}">반드시 입력해주세요</p>
+        </div>
+        <div class="form-group">
+            <label th:for="balance">잔고</label>
+            <input type="number" th:field="*{balance}" class="form-control" placeholder="잔고를 입력하세요"
+                   th:class="${#fields.hasErrors('balance')} ? 'form-control fieldError' : 'form-control'">
+            <p th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}">반드시 입력해주세요</p>
+        </div>
+<!--        <div class="form-group">-->
+<!--            <label th:for="zipcode">통화</label>-->
+<!--            <input type="text" th:field="*{currency}" class="form-control" placeholder="통화를 선택하세요">-->
+<!--        </div>-->
+        <div class="form-group mx-sm-1 mb-2">
+            <select th:field="*{currency}" class="form-control">
+                <option value="">통화 선택</option>
+                <option th:each="cur : ${T(study.example1.domain.Currency).values()}"
+                        th:value="${cur}"
+                        th:text="${cur}">option</option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <br/>
+    <div th:replace="~{fragments/footer :: footer}" />
+</div>
+
+</body>
+</html>

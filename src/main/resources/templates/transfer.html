@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/header :: header}" />
+<style>
+  .fieldError {
+    border-color: #bd2130;
+  }
+</style>
+<body>
+
+<div class="container">
+  <div th:replace="~{fragments/bodyHeader :: bodyHeader}" />
+  <form role="form" action="/transfer/new" th:object="${transferForm}" method="post">
+
+    <div class="form-group">
+      <label th:for="street">보내는 ID</label>
+      <input type="number" th:field="*{fromId}" class="form-control" placeholder="보내는 사람의 아이디를 입력하세요">
+    </div>
+    <div class="form-group">
+      <label th:for="street">받는 ID</label>
+      <input type="number" th:field="*{toId}" class="form-control" placeholder="받는 사람의 아이디를 입력하세요">
+    </div>
+    <div class="form-group">
+      <label th:for="zipcode">금액</label>
+      <input type="number" th:field="*{balance}" class="form-control" placeholder="보내려는 금액을 입력하세요">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+  <br/>
+  <div th:replace="~{fragments/footer :: footer}" />
+</div>
+
+</body>
+</html>
